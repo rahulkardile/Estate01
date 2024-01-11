@@ -29,8 +29,8 @@ useEffect(() => {
 }, [location.search])
 
     return (
-        <header className="bg-slate-200 shadow-md">
-            <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
+        <header className="bg-slate-300 w-full shadow-md ">
+            <div className="flex justify-between items-center mx-auto max-w-6xl p-3">
                 <h1 className="font-bold text-sm sm:text-xl flex flex-wrap ">
                     <Link to={'/'}>
                     <span className="text-slate-500">Wix</span>

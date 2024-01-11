@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Card = ({ listing }) => {
     console.log(listing?.imageUrls);
     return (
-        <div className='bg-white overflow-hidden rounded-lg w-full sm:w-[400px]'>
+        <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg h-full sm:h-[450px] w-[380px] sm:w-[330px]'>
             <Link to={`/listing/${listing?._id}`} >
                 <img
                     className='h-[320px] sm:h-[220px] w-full object-cover hover:scale-110 transition-scale duration-300'

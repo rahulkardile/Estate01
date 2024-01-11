@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
-import { RxDotFilled } from 'react-icons/rx'
 import { useSelector } from 'react-redux'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
 import {
   FaBath,
   FaBed,
@@ -15,16 +18,14 @@ import Contact from '../components/Contact'
 
 export const Listing = () => {
   const params = useParams();
-  const [listData, setListData] = useState({
-    imageUrls: []
-  })
+  const [listData, setListData] = useState(null)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [contact, setContact] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+ 
     try {
       setLoading(true);
       const ListData = async () => {
@@ -50,23 +51,6 @@ export const Listing = () => {
 
   }, [params.id])
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? listData.imageUrls.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  }
-
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === listData.imageUrls.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex)
-  }
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index)
-  }
-
-  console.log(currentUser);
 
   console.log(listData);
   return (
@@ -78,37 +62,21 @@ export const Listing = () => {
       {listData && !error && !loading && (
         <>
 
-          <div className="max-w-[1200px] h-[480px] w-full m-auto py-8 relative group">
-            <img
-              src={listData.imageUrls[currentIndex]}
-              className=' h-full w-full rounded-2xl bg-center object-cover'
-              alt='bg img' />
-
-            {/* left arrow */}
-            <div className='hidden group-hover:block absolute top-[50%] rounded-2xl translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 cursor-pointer text-white'>
-              <BsChevronCompactLeft onClick={prevSlide} />
-            </div>
-
-            {/* right arrow */}
-            <div className='hidden group-hover:block absolute top-[50%] rounded-2xl translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 cursor-pointer text-white'>
-              <BsChevronCompactRight onClick={nextSlide} />
-            </div>
-
-            <div className="flex top-4 text-gray-700 justify-center py-2">
-              {
-                listData.imageUrls.map((_slide, index) => (
-                  <div
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className="text-2xl cursor-pointer">
-                    <RxDotFilled className='hover:text-3xl' />
+          <div className="max-w-[1200px] h-[500px] mt-4 w-full m-auto">
+          <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
+                {listData.imageUrls.map((data) => (
+                  <div className='w-full'
+                    key={data.imageUrls}
+                  >
+                    <SwiperSlide>
+                    <img src={data} className='object-cover w-full h-[500px] rounded-xl' alt="" />
+                    </SwiperSlide>
                   </div>
-                ))
-              }
-            </div>
+                ))}
+              </Swiper>
           </div>
 
-          <div className="flex flex-col max-w-4xl mx-auto p-3  my-7 gap-4">
+          <div className="flex flex-col max-w-4xl mt-4 mx-auto p-3  my-7 gap-4">
             <div className='flex flex-col gap-2'>
               <div className="flex flex-wrap flex-col gap-2">
                 <div className='flex justify-between'>
