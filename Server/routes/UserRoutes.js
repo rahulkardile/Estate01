@@ -7,6 +7,8 @@ import { verifyToken } from '../utils/verifyUser.js';
 import User from '../model/UserModel.js';
 import Listing from '../model/ListingModel.js';
 
+const oneFifty = 1000 * 60 * 60 * 24 * 150;
+
 const router = express.Router();
 
 router.post('/signup', async (req, res, next) => {
@@ -40,7 +42,7 @@ router.post("/signin", async (req, res, next) => {
             .cookie('access_token', token, {
                 httpOnly: true,
                 secure: true,
-                
+                maxAge: oneFifty
             })
             .status(200)
             .json(rest)
@@ -59,7 +61,7 @@ router.post('/google', async (req, res, next) => {
             const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET)
             const { password: pass, ...rest } = user._doc;
             res
-                .cookie('access_token', token, { httpOnly: true })
+                .cookie('access_token', token, { httpOnly: true, maxAge: oneFifty })
                 .status(200)
                 .json(rest)
         }
@@ -76,7 +78,7 @@ router.post('/google', async (req, res, next) => {
             const token = jwt.sign({ id: newUser._id, email: newUser.email }, process.env.JWT_SECRET);
             const { password: pass, ...rest } = newUser._doc;
             res
-                .cookie('access_token', token, { httpOnly: true })
+                .cookie('access_token', token, { httpOnly: true, maxAge: oneFifty })
                 .status(200)
                 .json(rest)
         }

@@ -93,7 +93,7 @@ export default function Home() {
             <br />
             Place with peace
           </h1>
-          <div className="text-slate-400 text-xs lg:text-sm leading-loose tracking-widest">
+          <div className="text-slate-400 mt-3 text-xs lg:text-sm leading-loose tracking-widest">
             Wix EState will help you find your home fast, easy and comfortable.
             <br />
             We have a wide range of properties for you to choose from.
