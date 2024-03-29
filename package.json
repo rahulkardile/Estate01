@@ -5,13 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-<<<<<<< HEAD
     "dev": "node Server/server.js",
     "start": "nodemon Server/server.js",
-=======
-    "dev": "nodemon Server/server.js",
-    "start": "node Server/server.js",
->>>>>>> 9bfa0f7872c84a975dd92da74a8ae2d1f84a44ff
     "build": "npm install && npm install --prefix Client && npm run build --prefix Client"
   },
   "keywords": [],
